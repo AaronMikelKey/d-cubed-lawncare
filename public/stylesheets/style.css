@@ -1,6 +1,4 @@
-body {
-    color: black;
-}
-.main {
-    
+nav ul a,
+nav .brand-logo {
+  color: #444;
 }
