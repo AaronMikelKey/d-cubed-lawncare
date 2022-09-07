@@ -1,21 +1,27 @@
 {
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "dotenv": "^16.0.2",
-    "express": "^4.18.1",
-    "express-handlebars": "^6.0.6",
-    "express-session": "^1.17.3",
-    "mysql2": "^2.3.3",
-    "sequelize": "^6.21.4"
-  },
-  "scripts": {
-    "start": "node server.js"
-  },
   "name": "d-cubed-lawncare",
   "version": "1.0.0",
   "main": "server.js",
   "directories": {
     "test": "test"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.6",
+    "debug": "^4.3.4",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.6",
+    "express-session": "^1.17.3",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.19",
+    "sequelize": "^6.21.4"
+  },
+  "scripts": {
+    "start": "node bin/www",
+    "devstart": "nodemon --watch bin/www --watch * -e handlebars,js,json --ignore test/ bin/www",
+    "serverstart": "set DEBUG=app:* & npm run devstart"
   },
   "repository": {
     "type": "git",
