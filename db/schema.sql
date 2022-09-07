@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS d_cubed_db;
+
+CREATE DATABASE d_cubed_db;
