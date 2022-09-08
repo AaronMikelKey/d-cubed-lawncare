@@ -54,20 +54,29 @@ router.post("/login", (req, res) => {
     where: {
       username: req.body.username,
     },
-  }).then((dbUserData) => {
-    //verify user
-    const validPassword = dbUserData.checkPassword(req.body.password);
+  })
+    .then((dbUserData) => {
+      if (dbUserData !== null) {
+        //verify user
+        const validPassword = dbUserData.checkPassword(req.body.password);
 
-    if (!dbUserData || !validPassword) {
-      res.json({
-        message:
-          "Username or password incorrect. Please try again or create an account.",
-      });
-      return;
-    }
+        if (!dbUserData || !validPassword) {
+          res.json({
+            message:
+              "Username or password incorrect. Please try again or create an account.",
+          });
+          return;
+        }
 
-    res.json({ user: dbUserData, message: "You are now logged in." });
-  });
+        res.json({ user: dbUserData, message: "You are now logged in." });
+      } else {
+        res.redirect("/login");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.json({ error: err });
+    });
 });
 
 // PUT /api/users/1
