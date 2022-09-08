@@ -1,0 +1,25 @@
+<div class="row">
+  <h1 class="center-align login-message">Log in to D<sup>3</sup>
+    Lawncare or
+    <a href="/signup">create an account</a>
+  </h1>
+</div>
+<div class="row">
+  <form class="col s6 offset-s3" method="post">
+    <div class="row center-align">
+      <div class="input-field">
+        <input type="text" name="username" class="validate" required />
+        <label for="username">Username</label>
+      </div>
+    </div>
+    <div class="row center-align">
+      <div class="input-field">
+        <input id="password" type="password" class="validate" name="password" />
+        <label for="password">Password</label>
+      </div>
+    </div>
+    <div class="row center-align">
+      <button class="btn" type="submit" formaction="/api/login">Log in</button>
+    </div>
+  </form>
+</div>

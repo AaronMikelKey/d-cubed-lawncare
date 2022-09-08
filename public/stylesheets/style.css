@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 nav ul a,
 nav .brand-logo {
   color: #444;
@@ -49,8 +49,7 @@ p {
 
       footer.page-footer {
         margin: 0;
-      }
-=======
+      
 /* Custom Stylesheet */
 /**
  * Use this file to override Materialize files so you can update
@@ -58,6 +57,9 @@ p {
  *
  * Made By MaterializeCSS.com
  */
+
+/* Materialize */
+
 
  nav ul a,
  nav .brand-logo {
@@ -109,4 +111,10 @@ p {
 	 margin: 0;
  }
  
->>>>>>> 298d2fdf604454413c79ecaf7c9461023bab76c4
+
+
+ /*Login page*/
+ .login-message {
+	font-size: 3.8rem;
+ }
+
