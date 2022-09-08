@@ -70,7 +70,7 @@ router.post("/login", (req, res) => {
 
         res.json({ user: dbUserData, message: "You are now logged in." });
       } else {
-        res.redirect("/login");
+        res.json({ error: err });
       }
     })
     .catch((err) => {
