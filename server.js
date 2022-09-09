@@ -12,6 +12,19 @@ const userRouter = require("./routes/api/user-routes");
 
 const app = express();
 
+<<<<<<< Updated upstream
+=======
+//Session secrets
+const sessionVars = {
+  secret: "dev secret", //change to env on deployment
+  cookie: {
+    secure: false, //change to true on deployment, doesn't work unless it's on https website if true
+    sameSite: true,
+    maxAge: 7200000, // 2 hours
+  },
+};
+
+>>>>>>> Stashed changes
 //view engine setup
 app.engine("handlebars", hbs.engine);
 app.set("views", path.join(__dirname, "views"));
