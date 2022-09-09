@@ -32,4 +32,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/api", userRouter);
 
+sequelize.sync({ force: false }).then(() => {
+    app.listen(PORT, () => console.log("Now listening"));
+  });
+
 module.exports = app;
