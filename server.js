@@ -1,6 +1,6 @@
 const path = require("path");
 const express = require("express");
-const cookieParser = require("cookie-parser");
+const session = require('express-session')
 const logger = require("morgan");
 const bcrypt = require("bcrypt");
 
@@ -12,8 +12,6 @@ const userRouter = require("./routes/api/user-routes");
 
 const app = express();
 
-<<<<<<< Updated upstream
-=======
 //Session secrets
 const sessionVars = {
   secret: "dev secret", //change to env on deployment
@@ -24,7 +22,6 @@ const sessionVars = {
   },
 };
 
->>>>>>> Stashed changes
 //view engine setup
 app.engine("handlebars", hbs.engine);
 app.set("views", path.join(__dirname, "views"));
@@ -34,7 +31,7 @@ app.set("view engine", "handlebars");
 app.use(express.json());
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(session(sessionVars));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);

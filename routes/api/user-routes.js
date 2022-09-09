@@ -2,19 +2,19 @@ const router = require("express").Router();
 const { User } = require("../../models");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
+const { Cookie } = require("express-session");
 
 //Session secrets for cookie
-const sessionVars = {
+const cookieVars = {
   secret: "dev secret", //change to env on deployment
-  cookie: {
     secure: false, //change to true on deployment, doesn't work unless it's on https website if true
     sameSite: true,
     maxAge: 7200000, // 2 hours
-  },
+  
 };
 
 //session variable
-let sess;
+let sess = {username: "", password: "", cookie: ""};
 
 // GET /api/users
 router.get("/", (req, res) => {
@@ -78,32 +78,47 @@ router.post("/login", (req, res, next) => {
           "Username or password incorrect. Please try again or create an account.",
       });
       return;
-    }
-
-<<<<<<< Updated upstream
-    res.json({ user: dbUserData, message: "You are now logged in." });
-  });
-=======
-        sess = req.session;
-        const username = req.body.username;
-        const password = req.body.password;
-
-        sess.username = username;
-        sess.password = password;
-
-        res.redirect("/");
+      
       } else {
-        res.json({
-          message:
-            "Username or password incorrect. Please try again or create an account.",
-        });
+
+        const username = req.body.username;
+        const password = bcrypt.hashSync(req.body.password, 10);
+
+        console.log(req.session)
+        if (!req.session) {
+          /*
+          let newCookie = new Cookie();
+          newCookie.name = 'rememberMe' //value: JSON.stringify(sess),secret : cookieVars.secret, secure: cookieVars.secure, maxAge: cookieVars.maxAge)
+          newCookie.value = JSON.stringify(sess);
+
+          req.session.cookie = newCookie */
+
+          req.session.regenerate((err) => { 
+            if (err) { 
+              console.log(err) 
+            }
+            req.session.username = username
+            req.session.password = password
+            req.session.save((err) => { 
+              if (err) {
+                console.log(err)
+              } 
+              res.redirect('/')
+            
+            })
+          
+          });
+
+        } 
+        
+        res.redirect('/')
+        
       }
     })
     .catch((err) => {
       console.error(err);
       res.json({ error: err });
     });
->>>>>>> Stashed changes
 });
 
 // PUT /api/users/1

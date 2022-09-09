@@ -1,11 +1,14 @@
 const sequelize = require('../config/connection');
 const { User, Post } = require('../models');
 
+// Still enter 'password123' when trying to long in.
+// bcrypt hashes the entered password and checks against the hash in the db so that's why
+//    the passwords here are long strings
 const userdata = [
     {
       username: 'clbobbitt',
       email: 'chaz@gmail.com',
-      password: 'password123',
+      password: '$2b$10$oYuOfNDs9n4cMTScWH/rwutIdnbu7E.1EzK2AUA9SoI/djGlYoX/u',
       admin: 'TRUE',
       firstName: 'Chaz',
       lastName: 'Bobbitt',
@@ -18,7 +21,7 @@ const userdata = [
     {
     username: 'rkharris',
     email: 'regettaspearman@gmail.com',
-    password: 'password123',
+    password: '$2b$10$oYuOfNDs9n4cMTScWH/rwutIdnbu7E.1EzK2AUA9SoI/djGlYoX/u',
     admin: 'FALSE',
     firstName: 'RK',
     lastName: 'Harris',
@@ -31,7 +34,7 @@ const userdata = [
   {
     username: 'swbobbitt',
     email: 'swrichar4@gmail.com',
-    password: 'password123',
+    password: '$2b$10$oYuOfNDs9n4cMTScWH/rwutIdnbu7E.1EzK2AUA9SoI/djGlYoX/u',
     admin: 'FALSE',
     firstName: 'Sherica',
     lastName: 'Bobbitt',
