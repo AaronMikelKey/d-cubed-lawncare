@@ -25,10 +25,10 @@ Reviews.init(
         key: 'id'
       }
     },
-    appointment_id: {
+    schedule_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'appointment',
+        model: 'schedule',
         key: 'id'
       }
     }
