@@ -1,8 +1,7 @@
 const path = require("path");
 const express = require("express");
-const session = require('express-session')
+const session = require("express-session");
 const logger = require("morgan");
-const bcrypt = require("bcrypt");
 
 const exphbs = require("express-handlebars");
 const hbs = exphbs.create({});
@@ -19,7 +18,7 @@ const sessionVars = {
     secure: false, //change to true on deployment, doesn't work unless it's on https website if true
     sameSite: true,
     maxAge: 7200000, // 2 hours
-  },
+  }
 };
 
 //view engine setup

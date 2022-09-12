@@ -52,14 +52,14 @@ router.post("/signup", (req, res) => {
   User.create({
     username: req.body.username,
     email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 10),
+    password: req.body.password,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     stAddress: req.body.stAddress,
-    city: req.body.cit,
+    city: req.body.city,
     state: req.body.state,
     zip: req.body.zip,
-    phone: req.body.phone,
+    phoneNumber: req.body.phoneNumber
   })
     .then((dbUserData) => {
       console.log(dbUserData);
@@ -78,6 +78,7 @@ router.post("/login", (req, res, next) => {
     },
   })
     .then((dbUserData) => {
+<<<<<<< HEAD
       //verify user
       const validPassword = dbUserData.checkPassword(req.body.password);
 
@@ -116,6 +117,23 @@ router.post("/login", (req, res, next) => {
         }
 
         res.redirect("/");
+=======
+      if (dbUserData !== null) {
+        //verify user
+        const validPassword = dbUserData.checkPassword(req.body.password);
+
+        if (!dbUserData || !validPassword) {
+          res.json({
+            message:
+              "Username or password incorrect. Please try again or create an account.",
+          });
+          return;
+        }
+
+        res.json({ user: dbUserData, message: "You are now logged in." });
+      } else {
+        res.redirect("/login");
+>>>>>>> main
       }
     })
     .catch((err) => {

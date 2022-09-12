@@ -22,7 +22,7 @@
     "start": "node bin/www",
     "devstart": "nodemon --watch bin/www --watch * -e handlebars,js,json --ignore test/ bin/www",
     "serverstart": "set DEBUG=app:* & npm run devstart",
-    "macstart": "DEBUG=app:* nodemon -e handlebars,js,json bin/www"
+		"macstart": "DEBUG=app:* npm run devstart"
   },
   "repository": {
     "type": "git",
