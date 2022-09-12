@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
 // // create our Appointment model
 // class Appointments extends Model {
@@ -34,6 +34,8 @@ const sequelize = require('../config/connection');
 //   }
 // }
 
+class Appointments extends Model {}
+
 // create fields/columns for Appointment model
 Appointments.init(
   {
@@ -41,36 +43,36 @@ Appointments.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     title: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     service: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'user',
-        key: 'id'
-      }
+        model: "user",
+        key: "id",
+      },
     },
     schedule_id: {
-        type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
       references: {
-        model: 'schedule',
-        key: 'id'
-      }
+        model: "schedule",
+        key: "id",
+      },
     },
   },
   {
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'appointments'
+    modelName: "appointments",
   }
 );
 
