@@ -7,14 +7,13 @@ const { Cookie } = require("express-session");
 //Session secrets for cookie
 const cookieVars = {
   secret: "dev secret", //change to env on deployment
-    secure: false, //change to true on deployment, doesn't work unless it's on https website if true
-    sameSite: true,
-    maxAge: 7200000, // 2 hours
-  
+  secure: false, //change to true on deployment, doesn't work unless it's on https website if true
+  sameSite: true,
+  maxAge: 7200000, // 2 hours
 };
 
 //session variable
-let sess = {username: "", password: "", cookie: ""};
+let sess = { username: "", password: "", cookie: "" };
 
 // GET /api/users
 router.get("/", (req, res) => {
@@ -53,7 +52,14 @@ router.post("/signup", (req, res) => {
   User.create({
     username: req.body.username,
     email: req.body.email,
-    password: req.body.password,
+    password: bcrypt.hashSync(req.body.password, 10),
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    stAddress: req.body.stAddress,
+    city: req.body.cit,
+    state: req.body.state,
+    zip: req.body.zip,
+    phone: req.body.phone,
   })
     .then((dbUserData) => res.json(dbUserData))
     .catch((err) => {
@@ -68,23 +74,22 @@ router.post("/login", (req, res, next) => {
     where: {
       username: req.body.username,
     },
-  }).then((dbUserData) => {
-    //verify user
-    const validPassword = dbUserData.checkPassword(req.body.password);
+  })
+    .then((dbUserData) => {
+      //verify user
+      const validPassword = dbUserData.checkPassword(req.body.password);
 
-    if (!dbUserData || !validPassword) {
-      res.json({
-        message:
-          "Username or password incorrect. Please try again or create an account.",
-      });
-      return;
-      
+      if (!dbUserData || !validPassword) {
+        res.json({
+          message:
+            "Username or password incorrect. Please try again or create an account.",
+        });
+        return;
       } else {
-
         const username = req.body.username;
         const password = bcrypt.hashSync(req.body.password, 10);
 
-        console.log(req.session)
+        console.log(req.session);
         if (!req.session) {
           /*
           let newCookie = new Cookie();
@@ -93,26 +98,22 @@ router.post("/login", (req, res, next) => {
 
           req.session.cookie = newCookie */
 
-          req.session.regenerate((err) => { 
-            if (err) { 
-              console.log(err) 
+          req.session.regenerate((err) => {
+            if (err) {
+              console.log(err);
             }
-            req.session.username = username
-            req.session.password = password
-            req.session.save((err) => { 
+            req.session.username = username;
+            req.session.password = password;
+            req.session.save((err) => {
               if (err) {
-                console.log(err)
-              } 
-              res.redirect('/')
-            
-            })
-          
+                console.log(err);
+              }
+              res.redirect("/");
+            });
           });
+        }
 
-        } 
-        
-        res.redirect('/')
-        
+        res.redirect("/");
       }
     })
     .catch((err) => {
