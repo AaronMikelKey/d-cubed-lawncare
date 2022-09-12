@@ -5,7 +5,7 @@ const userdata = [
     {
       username: 'clbobbitt',
       email: 'chaz@gmail.com',
-      password: 'password123',
+      password: '53cd3f22-f1b0-46a0-884a-2c36afc52c0d',
       admin: true,
       firstName: 'Chaz',
       lastName: 'Bobbitt',
@@ -18,7 +18,7 @@ const userdata = [
     {
     username: 'rkharris',
     email: 'regettaspearman@gmail.com',
-    password: 'password123',
+    password: '53cd3f22-f1b0-46a0-884a-2c36afc52c0d',
     admin: false,
     firstName: 'RK',
     lastName: 'Harris',
@@ -31,7 +31,7 @@ const userdata = [
   {
     username: 'swbobbitt',
     email: 'swrichar4@gmail.com',
-    password: 'password123',
+    password: '53cd3f22-f1b0-46a0-884a-2c36afc52c0d',
     admin: false,
     firstName: 'Sherica',
     lastName: 'Bobbitt',
