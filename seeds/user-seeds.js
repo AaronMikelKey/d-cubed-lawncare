@@ -6,40 +6,40 @@ const userdata = [
       username: 'clbobbitt',
       email: 'chaz@gmail.com',
       password: 'password123',
-      admin: 'TRUE',
+      admin: TRUE,
       firstName: 'Chaz',
       lastName: 'Bobbitt',
       stadd: '125 Any Street',
       city: 'Anywhere',
       state: 'NC',
-      zip: '27284',
-      phone: '5555555555'
+      zip: 27284,
+      phone: 5555555555
     },
     {
     username: 'rkharris',
     email: 'regettaspearman@gmail.com',
     password: 'password123',
-    admin: 'FALSE',
+    admin: FALSE,
     firstName: 'RK',
     lastName: 'Harris',
     stAddress: '123 Any Street',
     city: 'Anywhere',
     state: 'NC',
-    zip: '27284',
-    phone: '5555558077'
+    zip: 27284,
+    phone: 5555558077
   },
   {
     username: 'swbobbitt',
     email: 'swrichar4@gmail.com',
     password: 'password123',
-    admin: 'FALSE',
+    admin: FALSE,
     firstName: 'Sherica',
     lastName: 'Bobbitt',
     stadd: '125 Any Street',
     city: 'Anywhere',
     state: 'NC',
-    zip: '27284',
-    phone: '5555555555'
+    zip: 27284,
+    phone: 5555555555
   }
 ];
 
