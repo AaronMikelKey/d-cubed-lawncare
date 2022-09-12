@@ -57,7 +57,7 @@ try {
   console.error("Unable to connect to the database:", error);
 }
 // turn on connection to db and server
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(() => {
   server.listen(port);
 });
 
