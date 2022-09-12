@@ -1,8 +1,8 @@
-const User = require("../User");
-const Reviews = require("../Reviews");
-const Schedule = require("../Schedule");
-const Appointments = require("../Appointments");
-const { hasOne } = require("../User");
+const User = require("../models/User");
+const Reviews = require("../models/Reviews");
+const Schedule = require("../models/Schedule");
+const Appointments = require("..models//Appointments");
+const { hasOne } = require("../models/User");
 
 //create associations
 User.hasMany(Appointments, {
