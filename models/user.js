@@ -51,7 +51,7 @@ User.init(
     // define a user type column
     admin: {
       type: DataTypes.BOOLEAN,
-      defaultValue: "FALSE",
+      defaultValue: false,
       allowNull: false
     },
     //define a first name column

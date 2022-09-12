@@ -2,7 +2,7 @@
 
 nav ul a,
 nav .brand-logo {
-	color: #444;
+	color: blue;
 }
 
 p {
@@ -10,7 +10,7 @@ p {
 }
 
 .sidenav-trigger {
-	color: #26a69a;
+	color: #32cd32;
 }
 
 .parallax-container {
