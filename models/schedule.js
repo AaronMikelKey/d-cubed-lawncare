@@ -1,6 +1,8 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
+class Schedule extends Model {}
+
 // create fields/columns for Schedule model
 Schedule.init(
   {
