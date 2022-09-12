@@ -61,7 +61,9 @@ router.post("/signup", (req, res) => {
     zip: req.body.zip,
     phone: req.body.phone,
   })
-    .then((dbUserData) => res.json(dbUserData))
+    .then((dbUserData) => {
+      console.log(dbUserData);
+    })
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
