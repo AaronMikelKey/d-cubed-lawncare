@@ -40,6 +40,13 @@ router.post("/signup", (req, res) => {
     username: req.body.username,
     email: req.body.email,
     password: req.body.password,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    stAddress: req.body.stAddress,
+    city: req.body.city,
+    state: req.body.state,
+    zip: req.body.zip,
+    phoneNumber: req.body.phoneNumber
   })
     .then((dbUserData) => res.json(dbUserData))
     .catch((err) => {
