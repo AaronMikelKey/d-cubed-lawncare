@@ -1,7 +1,7 @@
 const User = require("../models/user");
 const Reviews = require("../models/reviews");
 const Schedule = require("../models/schedule");
-const Appointments = require("..models/appointments");
+const Appointments = require("../models/appointments");
 const { hasOne } = require("../models/user");
 
 //create associations
