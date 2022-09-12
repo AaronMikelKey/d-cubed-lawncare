@@ -51,13 +51,6 @@ Appointments.init(
         type: DataTypes.STRING,
         allowNull: false
     },
-    appointment_url: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        isURL: true
-      }
-    },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
@@ -81,4 +74,4 @@ Appointments.init(
   }
 );
 
-module.exports = Post;
+module.exports = Appointments;
