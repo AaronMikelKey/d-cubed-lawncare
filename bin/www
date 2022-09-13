@@ -3,6 +3,7 @@ const http = require("http");
 const debug = require("debug")("d-cubed-lawncare:*");
 const server = http.createServer(app);
 const sequelize = require("../config/connection");
+const seedAll = require("../seeds/index");
 
 //normalize port into a number, string, or false
 const normalizePort = (val) => {
