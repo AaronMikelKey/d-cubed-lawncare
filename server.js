@@ -14,7 +14,11 @@ const app = express();
 //Session secrets
 const sessionVars = {
   secret: "dev secret", //change to env on deployment
-  cookie: { secure: true },
+  cookie: {
+    secure: false, //change to true on deployment, doesn't work unless it's on https website if true
+    sameSite: true,
+    maxAge: 7200000, // 2 hours
+  }
 };
 
 //view engine setup

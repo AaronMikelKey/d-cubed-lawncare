@@ -1,19 +1,66 @@
 <div class="row">
-	<form class="col s12">
-		<div class="row">
-			<label for="username">Username: </label>
-			<input type="text" name="username" class="validate" required>
-		</div>
-		<div class="row">
-			<div class="input-field col s12">
-				<input id="password" type="password" class="validate">
-				<label for="password">Password</label>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s12">
-				<input id="email" type="email" class="validate">
-				<label for="email">Email</label>
-			</div>
-	</form>
+  <h1 class="center-align login-message">Sign Up For D<sup>3</sup>
+    Lawncare
+  </h1>
+</div>
+<div class="row">
+  <form class="col s6 offset-s3" method="post">
+    <div class="row center-align">
+      <div class="input-field">
+        <input type="text" name="username" class="validate" required />
+        <label for="username">Username</label>
+      </div>
+    </div>
+    <div class="row center-align">
+      <div class="input-field">
+        <input id="password" type="password" class="validate" name="password" />
+        <label for="password">Password</label>
+      </div>
+    </div><div class="row center-align">
+      <div class="input-field">
+        <input id="email" type="email" class="validate" name="email" />
+        <label for="email">Email</label>
+      </div>
+    </div>
+    <div class="row center-align">
+      <div class="input-field col s6">
+        <input type="text" name="firstName" class="validate" required />
+        <label for="firstName">First Name</label>
+      </div>
+      <div class="input-field col s6">
+        <input type="text" name="lastName" class="validate" required />
+        <label for="lastName">Last Name</label>
+      </div>
+    </div>
+    <div class="row center-align">
+      <div class="input-field">
+        <input type="text" name="stAddress" class="validate" required />
+        <label for="stAddress">Street Address</label>
+      </div>
+    </div>
+    <div class="row center-align">
+      <div class="input-field col s6">
+        <input type="text" name="city" class="validate" required />
+        <label for="city">City</label>
+      </div>
+      <div class="input-field col s2">
+        <input type="text" name="state" class="validate" required />
+        <label for="state">State</label>
+      </div>
+      <div class="input-field col s4">
+        <input type="text" name="zip" class="validate" required />
+        <label for="zip">Zip Code</label>
+      </div>
+    </div>
+    <div class="row center-align">
+      <div class="input-field">
+        <input type="text" name="phone" class="validate" required />
+        <label for="phone">Phone</label>
+      </div>
+    </div>
+    <div class="row center-align">
+      <button class="btn btn-large" type="submit" formaction="/api/signup">Sign
+        Up<i class="material-icons right">send</i></button>
+    </div>
+  </form>
 </div>

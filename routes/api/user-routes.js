@@ -1,6 +1,30 @@
 const router = require("express").Router();
 const { User } = require("../../models");
 const bcrypt = require("bcrypt");
+const session = require("express-session");
+const { Cookie } = require("express-session");
+
+/*
+const sequelize = require("../config/connection");
+const seedAll = require("../seeds/index");
+// Attempt to connect to db, console error if it can't
+try {
+  sequelize.authenticate();
+  console.log("Connection has been established successfully.");
+} catch (error) {
+  console.error("Unable to connect to the database:", error);
+}*/
+
+//Session secrets for cookie
+const cookieVars = {
+  secret: "dev secret", //change to env on deployment
+  secure: false, //change to true on deployment, doesn't work unless it's on https website if true
+  sameSite: true,
+  maxAge: 7200000, // 2 hours
+};
+
+//session variable
+let sess = { username: "", password: "", cookie: "" };
 
 // GET /api/users
 router.get("/", (req, res) => {
@@ -25,7 +49,7 @@ router.get("/:id", (req, res) => {
         res.status(404).json({ message: "No user found with this id" });
         return;
       }
-      res.json(dbUserData);
+      res.json(dbUserData.username);
     })
     .catch((err) => {
       console.log(err);
@@ -46,9 +70,11 @@ router.post("/signup", (req, res) => {
     city: req.body.city,
     state: req.body.state,
     zip: req.body.zip,
-    phoneNumber: req.body.phoneNumber
+    phoneNumber: req.body.phoneNumber,
   })
-    .then((dbUserData) => res.json(dbUserData))
+    .then((dbUserData) => {
+      console.log(dbUserData);
+    })
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
@@ -56,28 +82,50 @@ router.post("/signup", (req, res) => {
 });
 
 // POST login route
-router.post("/login", (req, res) => {
+router.post("/login", (req, res, next) => {
   User.findOne({
     where: {
       username: req.body.username,
     },
   })
     .then((dbUserData) => {
-      if (dbUserData !== null) {
-        //verify user
-        const validPassword = dbUserData.checkPassword(req.body.password);
+      //verify user
+      const validPassword = dbUserData.checkPassword(req.body.password);
 
-        if (!dbUserData || !validPassword) {
-          res.json({
-            message:
-              "Username or password incorrect. Please try again or create an account.",
-          });
-          return;
-        }
-
-        res.json({ user: dbUserData, message: "You are now logged in." });
+      if (!dbUserData || !validPassword) {
+        res.json({
+          message:
+            "Username or password incorrect. Please try again or create an account.",
+        });
+        return;
       } else {
-        res.json({ error: err });
+        const username = req.body.username;
+        const password = bcrypt.hashSync(req.body.password, 10);
+
+        /*
+          let newCookie = new Cookie();
+          newCookie.name = 'rememberMe' //value: JSON.stringify(sess),secret : cookieVars.secret, secure: cookieVars.secure, maxAge: cookieVars.maxAge)
+          newCookie.value = JSON.stringify(sess);
+
+          req.session.cookie = newCookie */
+
+        req.session.regenerate((err) => {
+          if (err) {
+            console.log(err);
+          }
+          req.session.username = username;
+          req.session.password = password;
+          req.session.save((err) => {
+            if (err) {
+              console.log(err);
+            }
+            console.log(req.session);
+            res.send({
+              username: req.session.username,
+              expires: req.session.cookie._expires,
+            });
+          });
+        });
       }
     })
     .catch((err) => {
