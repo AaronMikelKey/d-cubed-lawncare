@@ -41,6 +41,19 @@ const userdata = [
     zip: 27284,
     phone: 5555555555,
   },
+  {
+    username: "Lblackwell",
+    email: "lucasblackwell569@gmail.com",
+    password: "$2b$10$oYuOfNDs9n4cMTScWH/rwutIdnbu7E.1EzK2AUA9SoI/djGlYoX/u",
+    admin: false,
+    fistName: "Lucas",
+    lastName: "Blackwell",
+    stadd: "129 Any Street",
+    city: "Anywhere",
+    state: "SC",
+    zip: 20505,
+    phone: 555555999,
+  },
 ];
 
 const seedUsers = () => User.bulkCreate(userdata, { individualHooks: true });
