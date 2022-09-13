@@ -113,8 +113,8 @@ router.post("/login", (req, res, next) => {
           if (err) {
             console.log(err);
           }
-          req.session.username = username;
-          req.session.password = password;
+          req.session.cookie.username = username;
+          req.session.cookie.password = password;
           req.session.save((err) => {
             if (err) {
               console.log(err);
