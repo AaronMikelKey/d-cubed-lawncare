@@ -25,7 +25,7 @@ https://github.com/AaronMikelKey/d-cubed-lawncare
 ## Contributors
 - Aaron Key - AaronMikelKey
 - Jessica Mulliken - jmullz-z
-- Jon Bullin - 
+- Jon Bullin - jonbullin84
 - Lucas Blackwell - Blackwell101
 - Regetta Harris - RKH1988
 
