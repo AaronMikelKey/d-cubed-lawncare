@@ -21,12 +21,12 @@ User.init(
       // instruct that this is the Primary Key
       primaryKey: true,
       // turn on auto increment
-      autoIncrement: true
+      autoIncrement: true,
     },
     // define a username column
     username: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     // define an email column
     email: {
@@ -36,7 +36,7 @@ User.init(
       unique: true,
       // if allowNull is set to false, we can run our data through validators before creating the table data
       validate: {
-        isEmail: true
+        isEmail: true,
       },
     },
     // define a password column
@@ -45,34 +45,34 @@ User.init(
       allowNull: false,
       validate: {
         // this means the password must be at least eight characters long
-        len: [8]
+        len: [8],
       },
     },
     // define a user type column
     admin: {
       type: DataTypes.BOOLEAN,
-      defaultValue: FALSE,
-      allowNull: false
+      defaultValue: false,
+      allowNull: false,
     },
     //define a first name column
     firstName: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     //define a last name column
     lastName: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     //define a street address column
     stAddress: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     //define a city column
     city: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     //define a state column
     state: {
@@ -80,7 +80,67 @@ User.init(
       allowNull: false,
       validate: {
         // this means the state abbreviation must be one of the following
-        isIn: [['AL','AK','AZ','AR','AS','CA','CO','CT','DE','DC','FL','GA','GU','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','CM','OH','OK','OR','PA','PR','RI','SC','SD','TN','TX','TT','UT','VT','VA','VI','WA','WV','WI','WY']],
+        isIn: [
+          [
+            "AL",
+            "AK",
+            "AZ",
+            "AR",
+            "AS",
+            "CA",
+            "CO",
+            "CT",
+            "DE",
+            "DC",
+            "FL",
+            "GA",
+            "GU",
+            "HI",
+            "ID",
+            "IL",
+            "IN",
+            "IA",
+            "KS",
+            "KY",
+            "LA",
+            "ME",
+            "MD",
+            "MA",
+            "MI",
+            "MN",
+            "MS",
+            "MO",
+            "MT",
+            "NE",
+            "NV",
+            "NH",
+            "NJ",
+            "NM",
+            "NY",
+            "NC",
+            "ND",
+            "CM",
+            "OH",
+            "OK",
+            "OR",
+            "PA",
+            "PR",
+            "RI",
+            "SC",
+            "SD",
+            "TN",
+            "TX",
+            "TT",
+            "UT",
+            "VT",
+            "VA",
+            "VI",
+            "WA",
+            "WV",
+            "WI",
+            "WY",
+          ],
+        ],
       },
     },
     //define a zip code column
@@ -89,17 +149,17 @@ User.init(
       allowNull: false,
       validate: {
         //makes sure the entry is numeric
-        isNumeric: true, 
-      }
+        isNumeric: true,
+      },
     },
     phone: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         //makes sure the entry is numeric
-        isNumeric: true, 
-      }
-    }
+        isNumeric: true,
+      },
+    },
   },
   {
     // TABLE CONFIGURATION OPTIONS GO HERE (https://sequelize.org/v5/manual/models-definition.html#configuration))
