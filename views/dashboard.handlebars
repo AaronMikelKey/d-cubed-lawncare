@@ -1,0 +1,43 @@
+{{#if data.admin}}
+<section>
+  <h2>Create New Schedule</h2>
+
+  <form class="new-schedule-form">
+    <div>
+      <label for="date">Date</label>
+      <input type="date" id="schedule-date" name="schedule-date" />
+    </div>
+    <div>
+      <label for="time">Time</label>
+      <input type="time" id="time" name="schedule-time" />
+    </div>
+    <button type="submit" class="btn">Create</button>
+  </form>
+</section>
+
+{{#if data.schedule.appointment_id}}
+<section>
+  <h2>Today's Schedule</h2>
+<table>
+    <tr>
+        <th>
+            Time
+        </th>
+                <th>
+            Appointment ID
+        </th>
+                <th>
+            Service Scheduled
+        </th>
+                <th>
+            Customer Name
+        </th>
+                <th>
+            Address
+        </th>
+    </tr>
+</table>
+</section>
+{{/if}}
+{{/if}}
+<script src="/javascript/add-post.js"></script>
