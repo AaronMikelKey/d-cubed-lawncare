@@ -58,45 +58,5 @@
 </table>
 </section>
 {{/if}}
-{{#if data.future.schedule.appointment_id}}
-<section>
-  <h2>Future Availability</h2>
-<table>
-    <tr>
-                <th>
-            Appointment ID
-        </th>
-                <th>
-            Time
-        </th>
-                <th>
-            Edit
-        </th>
-                <th>
-            Delete
-        </th>
-    </tr>
-    {{#each Appointment}}
-    <tr>
-        <td>
-            {{schedule.time}}
-        </td>
-        <td>
-            {{appointment.id}}
-        </td>
-        <td>
-            {{appointment.service}}
-        </td>
-        <td>
-            {{user.name}}
-        </td>
-        <td>
-            {{user.address}}
-        </td>
-    </tr>
-    {{/each}}
-</table>
-</section>
-{{/if}}
 {{/if}}
 <script src="/javascript/add-post.js"></script>
