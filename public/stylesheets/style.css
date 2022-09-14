@@ -54,3 +54,49 @@ footer.page-footer {
 .login-message {
  font-size: 3.8rem;
 }
+
+
+h5 {
+  background: rgba(0,0,0, 0.4);
+  width: fit-content;
+  padding: 10px;
+  border-radius: 30px;
+  font-weight: bold;
+  float: none;
+	margin: auto;
+}
+#logo-container > img:nth-child(1) {
+  height: 100%;
+  width: 100%;
+}
+
+#logo-container {
+  height: 100%;
+}
+/* Element | http://localhost:3001/ 
+
+#logo-container > img:nth-child(1) {
+  height: 100%;
+  width: 100%;
+}
+
+ Element | http://localhost:3001/ 
+
+#logo-container {
+  height: 100%;
+}
+
+Element | http://localhost:3001/ 
+
+h5.light-green-text {
+  box-sizing: ;
+  background: rgba(0,0,0, 0.4);
+  width: auto;
+  padding: 10px;
+  border-radius: 30px;
+  font-weight: bold;
+  float: none;
+}
+
+
+*/
