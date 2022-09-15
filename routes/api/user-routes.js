@@ -50,10 +50,10 @@ router.post("/signup", (req, res) => {
     city: req.body.city,
     state: req.body.state,
     zip: req.body.zip,
-    phoneNumber: req.body.phoneNumber,
+    phone: req.body.phone,
   })
-    .then((dbUserData) => {
-      console.log(dbUserData);
+    .then(() => {
+      res.redirect("/");
     })
     .catch((err) => {
       console.log(err);
@@ -98,6 +98,22 @@ router.post("/login", (req, res, next) => {
     .catch((err) => {
       console.error(err);
       res.json({ error: err });
+    });
+});
+
+router.get("/dashboard", (req, res) => {
+  let data = {};
+  User.findOne({
+    where: {
+      username: req.session.username,
+    },
+  })
+    .then((dbUserData) => {
+      console.log("dbUserData", dbUserData);
+      (data.username = dbUserData.username), (data.admin = dbUserData.admin);
+    })
+    .then(() => {
+      res.json(data);
     });
 });
 
