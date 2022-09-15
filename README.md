@@ -30,11 +30,11 @@ https://github.com/AaronMikelKey/d-cubed-lawncare
 - Regetta Harris - RKH1988
 
 ## Task Breakdown
-- Aaron: 
-- Jessica: 
-- Jon:
-- Lucas: 
-- Regetta: database
+- Aaron: Created/managed the Heroku page and repository on github, worked on the routes and views, and added cookies
+- Jessica: Created booking schedule, added review page, and chose images for webpage
+- Jon: Created the powerpoint and put in ideas in all areas of the project
+- Lucas: Created styling using CSS, input user seeds, and added appointment handlebars
+- Regetta: Input database seeds, Welcome handlebars, an worked on the schema file
 
 
 ## Features
