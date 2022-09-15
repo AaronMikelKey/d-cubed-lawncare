@@ -1,0 +1,144 @@
+{{#if data.admin}}
+<section>
+  <h2>Create New Schedule</h2>
+
+  <form class="new-schedule-form">
+    <div>
+      <label for="date">Date</label>
+      <input type="date" id="schedule-date" name="schedule-date" />
+    </div>
+    <div>
+      <label for="time">Time</label>
+      <input type="time" id="time" name="schedule-time" />
+    </div>
+    <button type="submit" class="btn">Create</button>
+  </form>
+</section>
+
+{{#if data.schedule.appointment_id}}
+<section>
+  <h2>Today's Schedule</h2>
+<table>
+    <tr>
+        <th>
+            Time
+        </th>
+                <th>
+            Appointment ID
+        </th>
+                <th>
+            Service Scheduled
+        </th>
+                <th>
+            Customer Name
+        </th>
+                <th>
+            Address
+        </th>
+    </tr>
+    {{#each Appointment}}
+    <tr>
+        <td>
+            {{schedule.time}}
+        </td>
+        <td>
+            {{appointment.id}}
+        </td>
+        <td>
+            {{appointment.service}}
+        </td>
+        <td>
+            {{user.name}}
+        </td>
+        <td>
+            {{user.address}}
+        </td>
+    </tr>
+    {{/each}}
+</table>
+</section>
+{{/if}}
+{{/if}}
+
+{{#unless data.admin}}
+{{#unless schedule.appointment_id}}
+<section>
+  <h2>Schedule Availability</h2>
+  <p><em>For appointments today, please contact us directly.</em></p>
+
+<table>
+    <tr>
+        <th>
+            Date
+        </th>
+                <th>
+            Time
+        </th>
+                <th>
+            Create Appointment
+        </th>
+    </tr>
+    {{#each openSchedule}}
+    <tr>
+        <td>
+            {{schedule.date}}
+        </td>
+        <td>
+            {{schedule.time}}
+        </td>
+        <td>
+            <button>Book Now</button>
+        </td>
+    </tr>
+    {{/each}}
+</table>
+</section>
+{{/unless}}
+
+{{#if myFutureAppointments}}
+<section>
+  <h2>Future Appointments</h2>
+  <p><em>To cancel appointments, we require 24 hour notice. Please contact us directly to cancel appointments.</em></p>
+<table>
+    <tr>
+        <th>
+            ID
+        </th>
+                <th>
+            Date
+        </th>
+                <th>
+            Time
+        </th>
+                <th>
+            Title
+        </th>
+                <th>
+            Service
+        </th>
+    </tr>
+    {{#each myFutureAppointments}}
+    <tr>
+        <td>
+            {{appointment.id}}
+        </td>
+        <td>
+            {{schedule.date}}
+        </td>
+        <td>
+            {{schedule.time}}
+        </td>
+        <td>
+            {{appointment.title}}
+        </td>
+        <td>
+            {{appointment.service}}
+        </td>
+    </tr>
+    {{/each}}
+</table>
+</section>
+{{/if}}
+{{/unless}}
+
+<script src="/javascript/add-schedule.js"></script>
