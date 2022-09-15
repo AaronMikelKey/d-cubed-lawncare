@@ -83,6 +83,7 @@ router.post("/signup", (req, res) => {
 
 // POST login route
 router.post("/login", (req, res, next) => {
+  console.log("api req", req.body);
   User.findOne({
     where: {
       username: req.body.username,
@@ -93,8 +94,8 @@ router.post("/login", (req, res, next) => {
       const validPassword = dbUserData.checkPassword(req.body.password);
 
       if (!dbUserData || !validPassword) {
-        res.json({
-          message:
+        res.render("login", {
+          error:
             "Username or password incorrect. Please try again or create an account.",
         });
         return;
@@ -102,31 +103,17 @@ router.post("/login", (req, res, next) => {
         const username = req.body.username;
         const password = bcrypt.hashSync(req.body.password, 10);
 
-        /*
-          let newCookie = new Cookie();
-          newCookie.name = 'rememberMe' //value: JSON.stringify(sess),secret : cookieVars.secret, secure: cookieVars.secure, maxAge: cookieVars.maxAge)
-          newCookie.value = JSON.stringify(sess);
-
-          req.session.cookie = newCookie */
-
+        req.session.username = username;
+        req.session.password = password;
         req.session.regenerate((err) => {
           if (err) {
             console.log(err);
           }
-          req.session.cookie.username = username;
-          req.session.cookie.password = password;
-          req.session.save((err) => {
-            if (err) {
-              console.log(err);
-            }
-            console.log(req.session);
-            res.send({
-              username: req.session.username,
-              expires: req.session.cookie._expires,
-            });
-          });
         });
       }
+    })
+    .then(() => {
+      res.redirect("/");
     })
     .catch((err) => {
       console.error(err);

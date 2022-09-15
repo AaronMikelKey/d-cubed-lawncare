@@ -4,6 +4,11 @@
     <a href="/signup">create an account</a>
   </h1>
 </div>
+{{#if error}}
+  <div class="row center-align">
+    <h4> {{error}} </h4>
+  </div>
+{{/if}}
 <div class="row">
   <form class="col s6 offset-s3" method="post">
     <div class="row center-align">
@@ -19,7 +24,7 @@
       </div>
     </div>
     <div class="row center-align">
-      <button class="btn" type="submit" formaction="/login">Log in</button>
+      <button class="btn" type="submit" formaction="/api/login">Log in</button>
     </div>
   </form>
 </div>
