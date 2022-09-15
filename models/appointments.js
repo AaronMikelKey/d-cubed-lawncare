@@ -20,13 +20,6 @@ Appointments.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    schedule_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "schedule",
-        key: "id",
-      },
-    },
   },
   {
     sequelize,

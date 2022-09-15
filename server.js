@@ -2,6 +2,8 @@ const path = require("path");
 const express = require("express");
 const session = require("express-session");
 const logger = require("morgan");
+const seedAppointments = require("./seeds/appointment-seeds");
+const seedSchedule = require("./seeds/schedule-seeds");
 
 const exphbs = require("express-handlebars");
 const hbs = exphbs.create({});

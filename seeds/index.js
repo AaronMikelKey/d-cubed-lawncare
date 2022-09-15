@@ -21,6 +21,7 @@ const seedAll = async () => {
   await seedReviews();
   console.log("--------------");
 
+  console.log("Done");
   process.exit(0);
 };
 

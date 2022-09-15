@@ -2,7 +2,7 @@ const router = require("express").Router();
 const fetch = require("node-fetch");
 
 router.get("/", (req, res) => {
-  // TODO: Add logic to check for logged in
+  console.log(req.session);
   const data = {
     username: req.session.username,
     expires: req.session._expires,
@@ -23,8 +23,27 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-router.get("/dashboard", (req, res) => {
-  res.render("dashboard");
+const getUser = async (url, data) => {
+  const response = await fetch(url, {
+    method: "POST",
+    cache: "no-cache",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    redirect: "follow",
+    body: JSON.stringify(data),
+  });
+  return response.json();
+};
+
+router.get("/dashboard", async (req, res) => {
+  getUser("https://d-cubed.herokuapp.com/api/dashboard", {
+    username: req.session.username,
+  }).then((data) => {
+    console.log(data);
+    return res.render("dashboard", data);
+  });
 });
 
 module.exports = router;

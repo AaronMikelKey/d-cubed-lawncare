@@ -19,13 +19,6 @@ Schedule.init(
     time: {
       type: DataTypes.STRING,
       allowNull: false,
-   },
-   appointment_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "appointments",
-        key: "id",
-      },
     },
   },
   {
