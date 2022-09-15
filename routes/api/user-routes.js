@@ -37,26 +37,6 @@ router.get("/", (req, res) => {
     });
 });
 
-// GET /api/users/1
-router.get("/:id", (req, res) => {
-  User.findOne({
-    where: {
-      id: req.params.id,
-    },
-  })
-    .then((dbUserData) => {
-      if (!dbUserData) {
-        res.status(404).json({ message: "No user found with this id" });
-        return;
-      }
-      res.json(dbUserData.username);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-
 // POST signup route
 router.post("/signup", (req, res) => {
   // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
@@ -118,6 +98,32 @@ router.post("/login", (req, res, next) => {
     .catch((err) => {
       console.error(err);
       res.json({ error: err });
+    });
+});
+
+// GET signout
+router.get("/signout", (req, res) => {
+  req.session.destroy();
+  res.redirect("/");
+});
+
+// GET /api/users/1
+router.get("/:id", (req, res) => {
+  User.findOne({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((dbUserData) => {
+      if (!dbUserData) {
+        res.status(404).json({ message: "No user found with this id" });
+        return;
+      }
+      res.json(dbUserData.username);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
     });
 });
 
