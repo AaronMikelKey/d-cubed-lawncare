@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../../models");
+const { User, Schedule } = require("../../models");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 const { Cookie } = require("express-session");
@@ -109,8 +109,11 @@ router.post("/dashboard", (req, res) => {
     },
   })
     .then((dbUserData) => {
-      console.log("dbUserData", dbUserData);
       (data.username = dbUserData.username), (data.admin = dbUserData.admin);
+    })
+    .then(Schedule.findAll())
+    .then((scheduleData) => {
+      data.schedule = scheduleData;
     })
     .then(() => {
       res.json(data);
