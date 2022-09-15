@@ -101,11 +101,11 @@ router.post("/login", (req, res, next) => {
     });
 });
 
-router.get("/dashboard", (req, res) => {
+router.post("/dashboard", (req, res) => {
   let data = {};
   User.findOne({
     where: {
-      username: req.session.username,
+      username: req.body.username,
     },
   })
     .then((dbUserData) => {
