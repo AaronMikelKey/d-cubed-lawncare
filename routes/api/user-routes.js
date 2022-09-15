@@ -102,30 +102,27 @@ router.post("/login", (req, res, next) => {
 });
 
 router.post("/dashboard", (req, res) => {
-  let data = {};
+  let data = {
+    username: "",
+    admin: null,
+    schedule: "",
+  };
 
   Schedule.findAll()
-    .then((data) => {
-      console.log("schedule" + data);
-      return data;
+    .then(() => {
+      data.schedule = data;
     })
-    .catch((err) => console.log(err))
     .then(
       User.findOne({
         where: {
           username: req.body.username,
         },
+      }).then((dbUserData) => {
+        (data.username = dbUserData.username), (data.admin = dbUserData.admin);
+        return data;
       })
     )
-    .then((dbUserData) => {
-      (data.username = dbUserData.username), (data.admin = dbUserData.admin);
-    })
-    .then((scheduleData) => {
-      console.log("schedule2" + scheduleData);
-      data.schedule = scheduleData;
-    })
     .then(() => {
-      data = JSON.stringify(data);
       res.json(data);
     });
 });
