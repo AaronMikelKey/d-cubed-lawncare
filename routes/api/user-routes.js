@@ -108,21 +108,23 @@ router.post("/dashboard", (req, res) => {
     schedule: "",
   };
 
-  Schedule.findAll()
-    .then(() => {
-      data.schedule = data;
+  Schedule.findAll().then((res) => {
+    data.schedule = JSON.stringify(res);
+  });
+  User.findOne({
+    where: {
+      username: req.body.username,
+    },
+  })
+    .then((dbUserData) => {
+      return (
+        (data.username = JSON.stringify(dbUserData.username)),
+        (data.admin = JSON.stringify(dbUserData.admin))
+      );
     })
-    .then(
-      User.findOne({
-        where: {
-          username: req.body.username,
-        },
-      }).then((dbUserData) => {
-        (data.username = dbUserData.username), (data.admin = dbUserData.admin);
-        return data;
-      })
-    )
+
     .then(() => {
+      data = JSON.stringify(data);
       res.json(data);
     });
 });

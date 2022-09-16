@@ -19,7 +19,7 @@
     </form>
   </section>
 
-  {{#if schedule.appointment_id}}
+  {{#if schedule.id}}
     <section>
       <h2>Today's Schedule</h2>
       <table>
@@ -40,7 +40,7 @@
             Address
           </th>
         </tr>
-        {{#each schedule.appointment}}
+        {{#each appointment}}
           <tr>
             <td>
               {{schedule.time}}
