@@ -41,7 +41,7 @@ router.get("/dashboard", async (req, res) => {
   getUser("https://d-cubed.herokuapp.com/api/dashboard", {
     username: req.session.username,
   }).then((data) => {
-    res.render("dashboard", data);
+    res.render("dashboard", JSON.parse(data));
   });
 });
 

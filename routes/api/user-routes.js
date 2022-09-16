@@ -43,7 +43,7 @@ router.post("/signup", (req, res) => {
   User.create({
     username: req.body.username,
     email: req.body.email,
-    password: req.body.password,
+    password: bcrypt.hash(req.body.password),
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     stAddress: req.body.stAddress,
