@@ -30,7 +30,7 @@ const getUser = async (url, data) => {
       "Content-Type": "application/json",
     },
     redirect: "follow",
-    body: JSON.stringify(data),
+    body: data,
   });
   console.log(response.body);
   return response;
@@ -38,12 +38,12 @@ const getUser = async (url, data) => {
 
 router.get("/dashboard", async (req, res) => {
   const username = req.session.username;
-  getUser("https://d-cubed.herokuapp.com/api/dashboard", username).then(
-    (data) => {
-      JSON.stringify(data);
-      res.render("dashboard", data);
-    }
-  );
+  getUser("https://d-cubed.herokuapp.com/api/dashboard", {
+    username: username,
+  }).then((data) => {
+    JSON.stringify(data);
+    res.render("dashboard", data);
+  });
 });
 
 module.exports = router;
