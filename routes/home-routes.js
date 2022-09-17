@@ -7,12 +7,10 @@ router.get("/", (req, res) => {
     username: req.session.username,
     expires: req.session._expires,
   };
-  console.log(req.session);
   res.render("welcome", data);
 });
 
 router.get("/login", (req, res) => {
-  console.log(req.session);
   if (req.session.username) {
     res.redirect("/");
   }
@@ -34,14 +32,16 @@ const getUser = async (url, data) => {
     redirect: "follow",
     body: JSON.stringify(data),
   });
-  return response.json();
+  console.log(response.body);
+  return response;
 };
 
 router.get("/dashboard", async (req, res) => {
   getUser("https://d-cubed.herokuapp.com/api/dashboard", {
     username: req.session.username,
   }).then((data) => {
-    res.render("dashboard", JSON.parse(data));
+    JSON.stringify(data);
+    res.render("dashboard", data);
   });
 });
 

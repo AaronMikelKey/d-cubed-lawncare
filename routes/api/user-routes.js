@@ -101,32 +101,30 @@ router.post("/login", (req, res, next) => {
     });
 });
 
-router.post("/dashboard", (req, res) => {
+router.post("/dashboard", async (req, res) => {
   let data = {
     username: "",
     admin: null,
     schedule: "",
   };
 
-  Schedule.findAll().then((res) => {
-    data.schedule = JSON.stringify(res);
-  });
-  User.findOne({
+  const scheduleData = await Schedule.findAll();
+  const userData = await User.findOne({
     where: {
       username: req.body.username,
     },
-  })
-    .then((dbUserData) => {
-      return (
-        (data.username = JSON.stringify(dbUserData.username)),
-        (data.admin = JSON.stringify(dbUserData.admin))
-      );
-    })
+  });
 
+  console.log(scheduleData);
+  res.json({ admin: userData.admin, data: { schedule: scheduleData } });
+  /*
+    .then((res) => {
+      data.schedule = JSON.stringify(res);
+    })
     .then(() => {
       data = JSON.stringify(data);
       res.json(data);
-    });
+    }); */
 });
 
 // GET signout

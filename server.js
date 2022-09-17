@@ -4,6 +4,7 @@ const session = require("express-session");
 const logger = require("morgan");
 const seedAppointments = require("./seeds/appointment-seeds");
 const seedSchedule = require("./seeds/schedule-seeds");
+const seedUsers = require("./seeds/user-seeds");
 
 const exphbs = require("express-handlebars");
 const hbs = exphbs.create({});
