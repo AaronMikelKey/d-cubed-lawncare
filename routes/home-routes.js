@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const fetch = require("node-fetch");
+const bcrypt = require("bcrypt");
 
 router.get("/", (req, res) => {
-  console.log(req.session);
+  console.log(req.cookies);
   const data = {
     username: req.session.username,
     expires: req.session._expires,
@@ -15,6 +16,26 @@ router.get("/login", (req, res) => {
     res.redirect("/");
   }
   res.render("login");
+});
+
+router.post("/login", async (req, res) => {
+  const token = await fetch("https://d-cubed.herokuapp.com/api/login", {
+    method: "POST",
+    cache: "no-cache",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username: req.body.username,
+      password: bcrypt.hash(req.body.password, 10),
+    }),
+  });
+  res.cookie("jwtAuth", token, {
+    expires: new Date(Date.now() + 3600000),
+    secure: false,
+  });
+  res.redirect("/");
 });
 
 router.get("/signup", (req, res) => {
@@ -32,7 +53,7 @@ const getUser = async (url, data) => {
     redirect: "follow",
     body: data,
   });
-  console.log(response.body);
+  console.log(response);
   return response;
 };
 

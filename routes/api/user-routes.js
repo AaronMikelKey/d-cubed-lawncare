@@ -1,8 +1,30 @@
 const router = require("express").Router();
 const { User, Schedule } = require("../../models");
 const bcrypt = require("bcrypt");
-const session = require("express-session");
-const { Cookie } = require("express-session");
+const jwt = require("jsonwebtoken");
+
+// JWT auth function
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+
+  if (token == null) return res.status(401);
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) return res.status(403).json({ err: err });
+    req.user = user;
+
+    next();
+  });
+};
+
+// JWT generate function
+
+const generateToken = (username) => {
+  return jwt.sign({ username: username }, process.env.JWT_SECRET, {
+    expiresIn: 1800,
+  });
+};
 
 /*
 const sequelize = require("../config/connection");
@@ -14,17 +36,6 @@ try {
 } catch (error) {
   console.error("Unable to connect to the database:", error);
 }*/
-
-//Session secrets for cookie
-const cookieVars = {
-  secret: "dev secret", //change to env on deployment
-  secure: false, //change to true on deployment, doesn't work unless it's on https website if true
-  sameSite: true,
-  maxAge: 7200000, // 2 hours
-};
-
-//session variable
-let sess = { username: "", password: "", cookie: "" };
 
 // GET /api/users
 router.get("/", (req, res) => {
@@ -53,7 +64,8 @@ router.post("/signup", (req, res) => {
     phone: req.body.phone,
   })
     .then(() => {
-      res.redirect("/");
+      const token = generateToken(req.body.username);
+      res.json(token);
     })
     .catch((err) => {
       console.log(err);
@@ -63,7 +75,6 @@ router.post("/signup", (req, res) => {
 
 // POST login route
 router.post("/login", (req, res, next) => {
-  console.log("api req", req.body);
   User.findOne({
     where: {
       username: req.body.username,
@@ -80,20 +91,11 @@ router.post("/login", (req, res, next) => {
         });
         return;
       } else {
-        const username = req.body.username;
-        const password = bcrypt.hashSync(req.body.password, 10);
+        console.log(generateToken(dbUserData.username));
+        const token = generateToken(dbUserData.username);
 
-        req.session.username = username;
-        req.session.password = password;
-        req.session.regenerate((err) => {
-          if (err) {
-            console.log(err);
-          }
-        });
+        res.json(token);
       }
-    })
-    .then(() => {
-      res.redirect("/");
     })
     .catch((err) => {
       console.error(err);
@@ -101,30 +103,16 @@ router.post("/login", (req, res, next) => {
     });
 });
 
-router.post("/dashboard", async (req, res) => {
-  let data = {
-    username: "",
-    admin: null,
-    schedule: "",
-  };
-
+router.post("/dashboard", authenticateToken, async (req, res) => {
   const scheduleData = await Schedule.findAll();
   const userData = await User.findOne({
     where: {
       username: req.body.username,
     },
   });
-
-  console.log(scheduleData);
-  res.json({ admin: userData.admin, data: { schedule: scheduleData } });
-  /*
-    .then((res) => {
-      data.schedule = JSON.stringify(res);
-    })
-    .then(() => {
-      data = JSON.stringify(data);
-      res.json(data);
-    }); */
+  res
+    .json({ admin: userData.admin, data: { schedule: scheduleData } })
+    .catch((err) => res.json({ error: err }));
 });
 
 // GET signout
