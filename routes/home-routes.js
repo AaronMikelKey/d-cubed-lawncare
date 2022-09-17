@@ -37,12 +37,13 @@ const getUser = async (url, data) => {
 };
 
 router.get("/dashboard", async (req, res) => {
-  getUser("https://d-cubed.herokuapp.com/api/dashboard", {
-    username: req.session.username,
-  }).then((data) => {
-    JSON.stringify(data);
-    res.render("dashboard", data);
-  });
+  const username = req.session.username;
+  getUser("https://d-cubed.herokuapp.com/api/dashboard", username).then(
+    (data) => {
+      JSON.stringify(data);
+      res.render("dashboard", data);
+    }
+  );
 });
 
 module.exports = router;
