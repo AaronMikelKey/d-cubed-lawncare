@@ -89,13 +89,11 @@ router.post("/login", (req, res, next) => {
   })
     .then((dbUserData) => {
       //verify user
-      console.log("DB user: ", dbUserData);
       const password = dbUserData.password;
-      console.log("password: ", password);
       const validPassword = dbUserData.checkPassword(password);
 
       if (!dbUserData || !validPassword) {
-        res.render("login", {
+        res.json({
           error:
             "Username or password incorrect. Please try again or create an account.",
         });
