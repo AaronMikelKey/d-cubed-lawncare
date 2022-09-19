@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const session = require("express-session");
 const logger = require("morgan");
+const cookieParser = require("cookie-parser");
 const seedAppointments = require("./seeds/appointment-seeds");
 const seedSchedule = require("./seeds/schedule-seeds");
 const seedUsers = require("./seeds/user-seeds");
@@ -36,7 +37,7 @@ app.set("view engine", "handlebars");
 app.use(express.json());
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: false }));
-app.use(session(sessionVars));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
