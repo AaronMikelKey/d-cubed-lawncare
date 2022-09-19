@@ -22,14 +22,9 @@ const authenticateToken = (req, res, next) => {
 
 const generateToken = (username) => {
   console.log("username: ", username);
-  console.log(
-    jwt.sign({ username: username }, process.env.JWT_SECRET, {
-      expiresIn: 1800,
-    })
-  );
 
   return jwt.sign(username, process.env.JWT_SECRET, {
-    expiresIn: 1800,
+    expiresIn: "2 days",
   });
 };
 
