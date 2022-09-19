@@ -89,22 +89,22 @@ router.post("/login", (req, res, next) => {
         username: req.body.username,
       },
     });
-    return password, user;
+    return { password, user };
   };
   data()
-    .then((password, dbUserData) => {
+    .then((response) => {
       //verify user
-      console.log(password);
-      const validPassword = dbUserData.checkPassword(password);
+      console.log(response.password);
+      const validPassword = response.dbUserData.checkPassword(password);
 
-      if (!dbUserData || !validPassword) {
+      if (!response.dbUserData || !validPassword) {
         return res.json({
           error:
             "Username or password incorrect. Please try again or create an account.",
         });
       } else {
-        console.log(generateToken(dbUserData.username));
-        const token = generateToken(dbUserData.username);
+        console.log(generateToken(response.dbUserData.username));
+        const token = generateToken(response.dbUserData.username);
 
         res.json(token);
       }
