@@ -27,10 +27,10 @@ const generateToken = (username) => {
       expiresIn: 1800,
     })
   );
-  jwt.sign(username, process.env.JWT_SECRET, {
+
+  return jwt.sign(username, process.env.JWT_SECRET, {
     expiresIn: 1800,
   });
-  return;
 };
 
 /*
