@@ -89,7 +89,7 @@ router.post("/login", (req, res, next) => {
   })
     .then((dbUserData) => {
       //verify user
-      const password = req.body.password;
+      const password = new String(req.body.password);
       const validPassword = dbUserData.checkPassword(password);
 
       if (!dbUserData || !validPassword) {
