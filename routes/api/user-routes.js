@@ -76,7 +76,6 @@ router.post("/signup", (req, res) => {
 // POST login route
 router.post("/login", (req, res, next) => {
   const data = async () => {
-    console.log(req.body.password);
     const password = req.body.password;
     const dbUserData = await User.findOne({
       where: {
@@ -99,7 +98,6 @@ router.post("/login", (req, res, next) => {
             "Username or password incorrect. Please try again or create an account.",
         });
       } else {
-        console.log(generateToken(response.dbUserData.username));
         const token = generateToken(response.dbUserData.username);
 
         res.json(token);
@@ -125,7 +123,14 @@ router.post("/dashboard", authenticateToken, async (req, res) => {
 
 // GET signout
 router.get("/signout", (req, res) => {
-  req.session.destroy();
+  res.cookie(
+    "jwtAuth",
+    { data: null },
+    {
+      expires: new Date(Date.now()),
+      secure: false,
+    }
+  );
   res.redirect("/");
 });
 
