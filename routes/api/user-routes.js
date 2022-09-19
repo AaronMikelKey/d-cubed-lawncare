@@ -5,8 +5,7 @@ const jwt = require("jsonwebtoken");
 
 // JWT auth function
 const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
+  const token = req.cookies.jwtAuth;
 
   if (token == null) return res.status(401);
 
