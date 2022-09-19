@@ -83,6 +83,7 @@ router.post("/signup", (req, res) => {
 // POST login route
 router.post("/login", (req, res, next) => {
   const data = async () => {
+    console.log(req.body.password);
     const password = req.body.password;
     const dbUserData = await User.findOne({
       where: {
