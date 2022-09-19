@@ -109,11 +109,9 @@ router.post("/dashboard", async (req, res) => {
       username: req.body.username,
     },
   });
-  console.log("scheduleData", scheduleData);
+  console.log("scheduleData", scheduleData[0]);
   console.log("userData: ", userData);
-  res
-    .json({ admin: userData.admin, data: { schedule: scheduleData } })
-    .catch((err) => res.json({ error: err }));
+  res.json({ admin: userData.admin, data: { schedule: scheduleData } });
 });
 
 // GET signout

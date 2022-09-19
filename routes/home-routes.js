@@ -100,12 +100,12 @@ router.get("/dashboard", authenticateToken, async (req, res) => {
   };
   const fetchData = { username: JSON.parse(decoded.data.username).username };
   console.log("decoded :", JSON.parse(decoded.data.username).username);
-  getUser("https://d-cubed.herokuapp.com/api/dashboard", {
-    fetchData,
-  }).then((data) => {
-    JSON.stringify(data);
-    res.render("dashboard", data);
-  });
+  getUser("https://d-cubed.herokuapp.com/api/dashboard", fetchData).then(
+    (data) => {
+      JSON.stringify(data);
+      res.render("dashboard", data);
+    }
+  );
 });
 
 module.exports = router;
