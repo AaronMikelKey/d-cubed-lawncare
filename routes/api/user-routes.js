@@ -23,9 +23,7 @@ const authenticateToken = (req, res, next) => {
 const generateToken = (username) => {
   console.log("username: ", username);
 
-  return jwt.sign(username, process.env.JWT_SECRET, {
-    expiresIn: "2 days",
-  });
+  return jwt.sign(username, process.env.JWT_SECRET);
 };
 
 /*
