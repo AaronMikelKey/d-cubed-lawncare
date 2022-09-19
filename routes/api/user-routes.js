@@ -93,11 +93,10 @@ router.post("/login", (req, res, next) => {
       const validPassword = dbUserData.checkPassword(password);
 
       if (!dbUserData || !validPassword) {
-        res.json({
+        return res.json({
           error:
             "Username or password incorrect. Please try again or create an account.",
         });
-        return;
       } else {
         console.log(generateToken(dbUserData.username));
         const token = generateToken(dbUserData.username);
