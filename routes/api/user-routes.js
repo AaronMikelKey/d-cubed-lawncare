@@ -84,7 +84,7 @@ router.post("/signup", (req, res) => {
 router.post("/login", (req, res, next) => {
   const data = async () => {
     const password = req.body.password;
-    const user = await User.findOne({
+    const dbUserData = await User.findOne({
       where: {
         username: req.body.username,
       },
