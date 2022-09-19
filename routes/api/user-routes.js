@@ -12,7 +12,7 @@ const authenticateToken = (req, res, next) => {
 
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) return res.status(403).json({ err: err });
-    req.user = user;
+    req.username = user;
 
     next();
   });
@@ -21,9 +21,16 @@ const authenticateToken = (req, res, next) => {
 // JWT generate function
 
 const generateToken = (username) => {
-  return jwt.sign({ username: username }, process.env.JWT_SECRET, {
+  console.log("username: ", username);
+  console.log(
+    jwt.sign({ username: username }, process.env.JWT_SECRET, {
+      expiresIn: 1800,
+    })
+  );
+  jwt.sign(username, process.env.JWT_SECRET, {
     expiresIn: 1800,
   });
+  return;
 };
 
 /*
@@ -82,7 +89,8 @@ router.post("/login", (req, res, next) => {
   })
     .then((dbUserData) => {
       //verify user
-      const validPassword = dbUserData.checkPassword(req.body.password);
+      password = new String(req.body.password);
+      const validPassword = dbUserData.checkPassword(password);
 
       if (!dbUserData || !validPassword) {
         res.render("login", {
