@@ -82,14 +82,18 @@ router.post("/signup", (req, res) => {
 
 // POST login route
 router.post("/login", (req, res, next) => {
-  User.findOne({
-    where: {
-      username: req.body.username,
-    },
-  })
-    .then((dbUserData) => {
+  const data = async () => {
+    const password = req.body.password;
+    const user = await User.findOne({
+      where: {
+        username: req.body.username,
+      },
+    });
+    return password, user;
+  };
+  data()
+    .then((password, dbUserData) => {
       //verify user
-      const password = req.body.password;
       console.log(password);
       const validPassword = dbUserData.checkPassword(password);
 
