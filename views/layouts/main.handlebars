@@ -17,15 +17,15 @@
     <div class="nav-wrapper container">
       <a id="logo-container" href="#" class="brand-logo"><img src="d3-logo.png" alt="blue d cubed with circles surrounding company motto locally owned. family operated."></a>
       <ul class="right hide-on-med-and-down">
-				{{#if username}}
-				<li><span class="black-text">Welcome, {{username}}</span></li>
+				{{#if data}}
+				<li><span class="black-text">Welcome, {{data.username}}</span></li>
 				{{/if}}
 				<li><a href="/">Home</a></li>
-				{{#unless username}}
+				{{#unless data}}
 				<li><a href="/login">Log In</a></li>
 				<li><a href="/signup">Sign Up</a></li>
 				{{/unless}}
-				{{#if username}}
+				{{#if data}}
 				<li><a href="/api/signout">Sign Out</a></li>
 				{{/if}}
       </ul>
