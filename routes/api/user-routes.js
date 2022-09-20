@@ -102,7 +102,6 @@ router.post("/login", (req, res, next) => {
 });
 
 router.post("/dashboard", async (req, res) => {
-  console.log("api req: ", req);
   const scheduleData = await Schedule.findAll();
   const userData = await User.findOne({
     where: {

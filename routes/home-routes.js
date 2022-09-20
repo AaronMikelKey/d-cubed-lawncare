@@ -98,13 +98,6 @@ router.get("/dashboard", authenticateToken, async (req, res) => {
       username: Buffer.from(tokenDecodablePart, "base64").toString(),
     },
   };
-  const fetchData = { username: JSON.parse(decoded.data.username).username };
-  const response = await getUser(
-    "https://d-cubed.herokuapp.com/api/dashboard",
-    fetchData
-  );
-
-  console.log(response);
 
   fetch("https://d-cubed.herokuapp.com/api/dashboard", {
     method: "POST",
@@ -112,14 +105,11 @@ router.get("/dashboard", authenticateToken, async (req, res) => {
       "Content-Type": "application/json",
     },
     body: { username: JSON.parse(decoded.data.username).username },
+  }).then((data) => {
+    console.log("res data: ", data.json());
+    JSON.stringify(data);
+    res.render("dashboard", data);
   });
-  /* .then(
-    (data) => {
-      console.log("res data: ", data.json());
-      JSON.stringify(data);
-      res.render("dashboard", data);
-    }
-  ); */
 });
 
 module.exports = router;
