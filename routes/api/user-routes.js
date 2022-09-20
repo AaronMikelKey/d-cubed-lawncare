@@ -101,7 +101,7 @@ router.post("/login", (req, res, next) => {
     });
 });
 
-router.post("/dashboard", authenticateToken, async (req, res) => {
+router.post("/dashboard", async (req, res) => {
   console.log("body: ", req.body);
   const scheduleData = await Schedule.findAll();
   const userData = await User.findOne({

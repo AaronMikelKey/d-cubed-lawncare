@@ -84,7 +84,7 @@ const getUser = async (url, data) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: data,
+    body: JSON.stringify(data),
   });
   console.log("getUserresponse: ", response);
   return response;
