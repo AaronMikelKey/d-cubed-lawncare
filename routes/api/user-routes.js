@@ -108,6 +108,7 @@ router.post("/dashboard", authenticateToken, async (req, res) => {
       username: req.body.username,
     },
   });
+  console.log(scheduleData);
   res
     .json({ admin: userData.admin, data: { schedule: scheduleData } })
     .catch((err) => res.json({ error: err }));
