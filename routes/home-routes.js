@@ -86,7 +86,7 @@ const getUser = async (url, data) => {
     },
     body: JSON.stringify(data),
   });
-  console.log("getUserresponse: ", response);
+  console.log("getUserresponse: ", response.body);
   return response;
 };
 
@@ -99,13 +99,27 @@ router.get("/dashboard", authenticateToken, async (req, res) => {
     },
   };
   const fetchData = { username: JSON.parse(decoded.data.username).username };
-  console.log("decoded :", JSON.parse(decoded.data.username).username);
-  getUser("https://d-cubed.herokuapp.com/api/dashboard", fetchData).then(
+  const response = await getUser(
+    "https://d-cubed.herokuapp.com/api/dashboard",
+    fetchData
+  );
+
+  console.log(response);
+
+  fetch("https://d-cubed.herokuapp.com/api/dashboard", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: { username: JSON.parse(decoded.data.username).username },
+  });
+  /* .then(
     (data) => {
+      console.log("res data: ", data.json());
       JSON.stringify(data);
       res.render("dashboard", data);
     }
-  );
+  ); */
 });
 
 module.exports = router;
