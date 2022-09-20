@@ -43,7 +43,7 @@ router.post("/signup", (req, res) => {
   User.create({
     username: req.body.username,
     email: req.body.email,
-    password: bcrypt.hash(req.body.password),
+    password: bcrypt.hash(req.body.password, 10),
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     stAddress: req.body.stAddress,
@@ -102,6 +102,8 @@ router.post("/login", (req, res, next) => {
 });
 
 router.post("/dashboard", authenticateToken, async (req, res) => {
+  console.log("username: ", req.body.username);
+  console.log("schedule: ", req.body.schedule);
   const scheduleData = await Schedule.findAll();
   const userData = await User.findOne({
     where: {
