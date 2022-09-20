@@ -13,8 +13,10 @@
     "express": "^4.18.1",
     "express-handlebars": "^6.0.6",
     "express-session": "^1.17.3",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
+    "node-fetch": "^2.6.7",
     "nodemon": "^2.0.19",
     "sequelize": "^6.21.4"
   },
@@ -22,7 +24,7 @@
     "start": "node bin/www",
     "devstart": "nodemon --watch bin/www --watch * -e handlebars,js,json --ignore test/ bin/www",
     "serverstart": "set DEBUG=app:* & npm run devstart",
-		"macstart": "DEBUG=app:* npm run devstart"
+    "macstart": "DEBUG=app:* npm run devstart"
   },
   "repository": {
     "type": "git",

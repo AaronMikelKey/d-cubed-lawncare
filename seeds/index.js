@@ -1,27 +1,28 @@
-const seedUsers = require('./user-seeds');
-const seedSchedule = require('./schedule-seeds');
-const seedAppointments = require('./appointment-seeds');
-const seedReviews = require('./reviews-seeds');
+const seedUsers = require("./user-seeds");
+const seedSchedule = require("./schedule-seeds");
+const seedAppointments = require("./appointment-seeds");
+const seedReviews = require("./reviews-seeds");
 
-const sequelize = require('../config/connection');
+const sequelize = require("../config/connection");
 
 const seedAll = async () => {
   await sequelize.sync({ force: true });
-  console.log('--------------');
+  console.log("--------------");
 
   await seedUsers();
-  console.log('--------------');
+  console.log("--------------");
 
   await seedSchedule();
-  console.log('--------------');
+  console.log("--------------");
 
   await seedAppointments();
-  console.log('--------------');
+  console.log("--------------");
 
   await seedReviews();
-  console.log('--------------');
+  console.log("--------------");
 
+  console.log("Done");
   process.exit(0);
 };
 
-seedAll();
+module.exports = seedAll;

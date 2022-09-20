@@ -17,19 +17,29 @@
     <div class="nav-wrapper container">
       <a id="logo-container" href="#" class="brand-logo"><img src="d3-logo.png" alt="blue d cubed with circles surrounding company motto locally owned. family operated."></a>
       <ul class="right hide-on-med-and-down">
+				{{#if data}}
+				<li><span class="black-text">Welcome, {{data.username}}</span></li>
+				<li><a href="/dashboard">Dashboard</a></li>
+				{{/if}}
 				<li><a href="/">Home</a></li>
-				{{#unless loggedIn}}
+				{{#unless data}}
 				<li><a href="/login">Log In</a></li>
 				<li><a href="/signup">Sign Up</a></li>
 				{{/unless}}
+				{{#if data}}
+				<li><a href="/api/signout">Sign Out</a></li>
+				{{/if}}
       </ul>
 
       <ul id="nav-mobile" class="sidenav">
         <li><a href="/">Home</a></li>
-				{{#unless loggedIn}}
+				{{#unless username}}
 				<li><a href="/login">Log In</a></li>
 				<li><a href="/signup">Sign Up</a></li>
 				{{/unless}}
+				{{#if username}}
+				<li><a href="/api/signout">Sign Out</a></li>
+				{{/if}}
       </ul>
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>

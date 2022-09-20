@@ -2,6 +2,10 @@ const path = require("path");
 const express = require("express");
 const session = require("express-session");
 const logger = require("morgan");
+const cookieParser = require("cookie-parser");
+const seedAppointments = require("./seeds/appointment-seeds");
+const seedSchedule = require("./seeds/schedule-seeds");
+const seedUsers = require("./seeds/user-seeds");
 
 const exphbs = require("express-handlebars");
 const hbs = exphbs.create({});
@@ -14,7 +18,14 @@ const app = express();
 //Session secrets
 const sessionVars = {
   secret: "dev secret", //change to env on deployment
-  cookie: { secure: true },
+  saveUninitialized: false,
+  resave: false,
+  username: "",
+  cookie: {
+    secure: false, //change to true on deployment, doesn't work unless it's on https website if true
+    sameSite: true,
+    maxAge: 72000, // 2 hours
+  },
 };
 
 //view engine setup
@@ -26,7 +37,7 @@ app.set("view engine", "handlebars");
 app.use(express.json());
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: false }));
-app.use(session(sessionVars));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);

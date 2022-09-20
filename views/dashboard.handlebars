@@ -1,63 +1,67 @@
-{{#if data.admin}}
-<section>
-  <h2>Create New Schedule</h2>
+{{#if admin}}
+  <section>
+    <h2>Create New Schedule</h2>
 
-  <form class="new-schedule-form">
-    <div>
-      <label for="date">Date</label>
-      <input type="date" id="schedule-date" name="schedule-date" />
-    </div>
-    <div>
-      <label for="time">Time</label>
-      <input type="time" id="time" name="schedule-time" />
-    </div>
-    <button type="submit" class="btn">Create</button>
-  </form>
-</section>
+    <form class="new-schedule-form">
+      <div>
+        <label for="date">Date</label>
+        <input type="date" id="schedule-date" name="schedule-date" />
+      </div>
+      <div>
+        <label for="time">Time</label>
+        <input type="time" id="time" name="schedule-time" />
+      </div>
+      <button
+        type="submit"
+        class="btn"
+        formaction="/api/newSchedule"
+      >Create</button>
+    </form>
+  </section>
 
-{{#if data.schedule.appointment_id}}
-<section>
-  <h2>Today's Schedule</h2>
-<table>
-    <tr>
-        <th>
+  {{#if schedule.id}}
+    <section>
+      <h2>Today's Schedule</h2>
+      <table>
+        <tr>
+          <th>
             Time
-        </th>
-                <th>
+          </th>
+          <th>
             Appointment ID
-        </th>
-                <th>
+          </th>
+          <th>
             Service Scheduled
-        </th>
-                <th>
+          </th>
+          <th>
             Customer Name
-        </th>
-                <th>
+          </th>
+          <th>
             Address
-        </th>
-    </tr>
-    {{#each Appointment}}
-    <tr>
-        <td>
-            {{schedule.time}}
-        </td>
-        <td>
-            {{appointment.id}}
-        </td>
-        <td>
-            {{appointment.service}}
-        </td>
-        <td>
-            {{user.name}}
-        </td>
-        <td>
-            {{user.address}}
-        </td>
-    </tr>
-    {{/each}}
-</table>
-</section>
-{{/if}}
+          </th>
+        </tr>
+        {{#each appointment}}
+          <tr>
+            <td>
+              {{schedule.time}}
+            </td>
+            <td>
+              {{appointment.id}}
+            </td>
+            <td>
+              {{schedule.service_scheduled}}
+            </td>
+            <td>
+              {{user.name}}
+            </td>
+            <td>
+              {{user.address}}
+            </td>
+          </tr>
+        {{/each}}
+      </table>
+    </section>
+  {{/if}}
 {{/if}}
 
 {{#unless data.admin}}
