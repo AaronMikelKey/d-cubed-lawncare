@@ -108,8 +108,6 @@ router.post("/dashboard", async (req, res) => {
       username: req.body.username,
     },
   });
-  console.log("scheduleData", scheduleData[0]);
-  console.log("userData: ", userData);
   res.json({ admin: userData.admin, data: { schedule: scheduleData } });
 });
 
