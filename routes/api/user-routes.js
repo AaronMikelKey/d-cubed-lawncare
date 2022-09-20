@@ -19,22 +19,12 @@ const authenticateToken = (req, res, next) => {
 
 // JWT generate function
 
-const generateToken = (username) => {
-  console.log("username: ", username);
-
-  return jwt.sign(username, process.env.JWT_SECRET);
+const generateToken = (username, id, admin) => {
+  return jwt.sign(
+    { username: username, userId: id, admin: admin },
+    process.env.JWT_SECRET
+  );
 };
-
-/*
-const sequelize = require("../config/connection");
-const seedAll = require("../seeds/index");
-// Attempt to connect to db, console error if it can't
-try {
-  sequelize.authenticate();
-  console.log("Connection has been established successfully.");
-} catch (error) {
-  console.error("Unable to connect to the database:", error);
-}*/
 
 // GET /api/users
 router.get("/", (req, res) => {
@@ -86,18 +76,21 @@ router.post("/login", (req, res, next) => {
   data()
     .then((response) => {
       //verify user
-      console.log("response", response);
       const validPassword = response.dbUserData.checkPassword(
         response.password
       );
-
+      // No user or invalid PW
       if (!response.dbUserData || !validPassword) {
         return res.json({
           error:
             "Username or password incorrect. Please try again or create an account.",
         });
       } else {
-        const token = generateToken(response.dbUserData.username);
+        const token = generateToken(
+          response.dbUserData.username,
+          response.dbUserData.id,
+          response.dbUserData.admin
+        );
 
         res.json(token);
       }
