@@ -5,8 +5,7 @@ const jwt = require("jsonwebtoken");
 
 // JWT auth function
 const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
+  const token = req.cookies.jwtAuth.data;
 
   if (token == null) return res.status(401);
 
@@ -31,10 +30,8 @@ router.get("/", (req, res, next) => {
       username: Buffer.from(tokenDecodablePart, "base64").toString(),
     },
   };
-  console.log(decoded);
-
-  const username = jwt.verify(req.cookies.jwtAuth.data, process.env.JWT_SECRET);
-  res.render("welcome", decoded);
+  const username = JSON.parse(decoded.data.username);
+  res.render("welcome", { data: username });
 });
 
 router.get("/login", (req, res) => {
@@ -51,6 +48,7 @@ router.post("/login", async (req, res) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      // Data from form inputs
       username: req.body.username,
       password: req.body.password,
     }),
@@ -63,7 +61,7 @@ router.post("/login", async (req, res) => {
         "jwtAuth",
         { data: data },
         {
-          expires: new Date(Date.now() + 3600000),
+          expires: new Date(Date.now() + 3600000), //change back to 3600000
           secure: false,
         }
       );
@@ -83,23 +81,27 @@ router.get("/signup", (req, res) => {
 const getUser = async (url, data) => {
   const response = await fetch(url, {
     method: "POST",
-    cache: "no-cache",
-    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
-    redirect: "follow",
     body: data,
   });
-  console.log(response);
+  console.log("getUserresponse: ", response);
   return response;
 };
 
 router.get("/dashboard", authenticateToken, async (req, res) => {
-  const username = req.user;
-  console.log(username);
+  const token = req.cookies.jwtAuth;
+  const tokenDecodablePart = token.data.split(".")[1];
+  const decoded = {
+    data: {
+      username: Buffer.from(tokenDecodablePart, "base64").toString(),
+    },
+  };
+  const fetchData = { username: JSON.parse(decoded.data.username).username };
+  console.log("decoded :", JSON.parse(decoded.data.username).username);
   getUser("https://d-cubed.herokuapp.com/api/dashboard", {
-    username: username,
+    fetchData,
   }).then((data) => {
     JSON.stringify(data);
     res.render("dashboard", data);

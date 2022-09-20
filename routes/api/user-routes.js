@@ -102,15 +102,15 @@ router.post("/login", (req, res, next) => {
 });
 
 router.post("/dashboard", authenticateToken, async (req, res) => {
-  console.log("username: ", req.body.username);
-  console.log("schedule: ", req.body.schedule);
+  console.log("body: ", req.body);
   const scheduleData = await Schedule.findAll();
   const userData = await User.findOne({
     where: {
       username: req.body.username,
     },
   });
-  console.log(scheduleData);
+  console.log("scheduleData", scheduleData);
+  console.log("userData: ", userData);
   res
     .json({ admin: userData.admin, data: { schedule: scheduleData } })
     .catch((err) => res.json({ error: err }));
